@@ -1,0 +1,7 @@
+[package]
+name = "win-os-app"
+version = "0.1.0"
+authors = ["David Herman <david.herman@gmail.com>"]
+
+[dependencies]
+os_info = "1.0.2"

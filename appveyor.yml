@@ -1,0 +1,34 @@
+os: Visual Studio 2015
+
+## Build Matrix ##
+
+environment:
+  fast_finish: true
+  matrix:
+
+### MSVC Toolchains ###
+
+  # Stable 32-bit MSVC
+    - channel: stable
+      target: i686-pc-windows-msvc
+
+## Install Script ##
+
+install:
+  - appveyor DownloadFile https://win.rustup.rs/ -FileName rustup-init.exe
+  - rustup-init -yv --default-toolchain %channel% --default-host %target%
+  - set PATH=%PATH%;%USERPROFILE%\.cargo\bin
+  - rustc -vV
+  - cargo -vV
+
+## Build Script ##
+
+# 'cargo test' takes care of building for us, so disable Appveyor's build stage. This prevents
+# the "directory does not contain a project or solution file" error.
+build: false
+
+# Uses 'cargo test' to run tests and build. Alternatively, the project may call compiled programs
+#directly or perform other testing commands. Rust will automatically be placed in the PATH
+# environment variable.
+test_script:
+  - cargo test --all --verbose %cargoflags%
