@@ -4,4 +4,4 @@ version = "0.1.0"
 authors = ["David Herman <david.herman@gmail.com>"]
 
 [dependencies]
-os_info = "1.0.2"
+os_info = { git = "https://github.com/dherman/os_info", branch = "win32-extern-system" }
